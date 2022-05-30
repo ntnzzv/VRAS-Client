@@ -5,6 +5,9 @@ import Paper from "@mui/material/Paper";
 import Chart from "../components/Chart";
 import Deposits from "../components/Deposits";
 import Orders from "../components/Orders";
+import firebase from "../firebase/firebase";
+import { collection, getDocs } from "firebase/firestore/lite";
+
 export default function Home() {
   return (
     <div>
