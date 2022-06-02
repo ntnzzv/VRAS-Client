@@ -1,32 +1,28 @@
-import * as React from "react";
+import React from "react";
 import { useTheme } from "@mui/material/styles";
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from "recharts";
-import Title from "./Title";
+import Title from "../Title";
 
-function createData(time, amount) {
-  return { time, amount };
+function createData(simulationsData) {
+  let datesAmount = new Map();
+  simulationsData.map((sim) => {
+    if (!datesAmount.has(sim.date)) {
+      datesAmount.set(sim.date, 1);
+    } else {
+      datesAmount.set(sim.date, datesAmount.get(sim.date) + 1);
+    }
+  });
+  return Array.from(datesAmount, ([date, amount]) => ({ date, amount }));
 }
 
-const data = [
-  createData("04/05", 0),
-  createData("05/05", 3),
-  createData("06/05", 6),
-  createData("07/05", 7),
-  createData("08/05", 10),
-  createData("09/05", 13),
-  createData("10/05", 20),
-  createData("13/05", 25),
-];
-
-export default function Chart() {
+export default function SimulationsAmount({ data }) {
   const theme = useTheme();
-
   return (
     <React.Fragment>
       <Title>This Week</Title>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={createData(data)}
           margin={{
             top: 16,
             right: 16,
@@ -35,7 +31,7 @@ export default function Chart() {
           }}
         >
           <XAxis
-            dataKey="time"
+            dataKey="date"
             stroke={theme.palette.text.secondary}
             style={theme.typography.body2}
           />
@@ -57,7 +53,7 @@ export default function Chart() {
             type="monotone"
             dataKey="amount"
             stroke={theme.palette.primary.main}
-            dot={false}
+            dot={true}
           />
         </LineChart>
       </ResponsiveContainer>

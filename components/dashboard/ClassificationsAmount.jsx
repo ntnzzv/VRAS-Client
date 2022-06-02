@@ -1,9 +1,8 @@
-import * as React from "react";
-import Link from "@mui/material/Link";
+import React from "react";
 import Typography from "@mui/material/Typography";
-import Title from "./Title";
+import Title from "../Title";
 
-export default function Deposits() {
+export default function ClassificationsAmount({ data }) {
   return (
     <React.Fragment>
       <div
@@ -24,20 +23,16 @@ export default function Deposits() {
         <div>
           <Title>Overall Screenings Done</Title>
           <Typography component="p" variant="h4">
-            25
+            {data.length}
           </Typography>
         </div>
         <div>
           <Title>ASD Classifications</Title>
-          <Typography component="p" variant="h4">
-            20
-          </Typography>
+          <Typography component="p" variant="h4"></Typography>
         </div>
         <div>
           <Title>TD Classifications</Title>
-          <Typography component="p" variant="h4">
-            5
-          </Typography>
+          <Typography component="p" variant="h4"></Typography>
         </div>
       </div>
     </React.Fragment>

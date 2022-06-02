@@ -1,81 +1,39 @@
-import DotsChart from "../components/DotsChart";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Title from "../components/Title";
-import { TextField } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Grido from "../components/Grido";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import AnalyticsPage from "../components/analytics/AnalyticsPage";
 
-export default function dotschart() {
+export default function analytics({ data }) {
   return (
     <div>
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Grid container spacing={3}>
-          {/* Recent Deposits */}
-
-          {/* Chart */}
-          <Grid item xs={12} md={12} lg={12}>
-            <Paper
-              sx={{
-                p: 1,
-                display: "flex",
-                flexDirection: "column",
-                height: 500,
-              }}
-            >
-              <Title>Classification and Data Correlation</Title>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  marginRight: "20px",
-                }}
-              >
-                <FormControl sx={{ ml: 3, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-helper-label">Y-Axis</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={1}
-                    label="Age"
-                  >
-                    <MenuItem value={1}>AQ-Score</MenuItem>
-                    <MenuItem value={2}>Δ-IPS</MenuItem>
-                    <MenuItem value={3}>Average-IPS</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl sx={{ ml: 3, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-helper-label">X-Axis</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={3}
-                    label="Age"
-                  >
-                    <MenuItem value={1}>AQ-Score</MenuItem>
-                    <MenuItem value={2}>Δ-IPS</MenuItem>
-                    <MenuItem value={3}>Average-IPS</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-              <DotsChart />
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <Grido />
-            </Paper>
-          </Grid>
-        </Grid>
-      </Container>
+      <AnalyticsPage data={data} />
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  let res = await fetch("http://localhost:3000/api/simulationsData", {
+    method: "GET",
+    withCredentials: true,
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      key: `${process.env.MY_API}`,
+    },
+  });
+  const unformattedData = await res.json();
+
+  const data = unformattedData.map((item, index) => {
+    let formattedDate = new Date(item.date.seconds * 1000).toLocaleDateString();
+    delete item.date;
+    item.date = formattedDate;
+    let avgIpsBefore = (Number(item["ips-A-from"]) + Number(item["ips-A-towards"])) / 2;
+    let avgIpsAfter = (Number(item["ips-B-from"]) + Number(item["ips-B-towards"])) / 2;
+    item["avg-ips-A"] = avgIpsBefore;
+    item["avg-ips-B"] = avgIpsAfter;
+    item["average-ips"] = (avgIpsAfter + avgIpsBefore) / 2;
+    item["delta-ips"] = avgIpsBefore - avgIpsAfter;
+    item["id"] = index;
+    return item;
+  });
+  return {
+    props: { data }, // will be passed to the page component as props
+  };
 }
