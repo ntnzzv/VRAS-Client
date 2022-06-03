@@ -6,11 +6,10 @@ export default async function handler(req, res) {
   }
   const databaseRef = collection(db, "simulations");
   const countRefDoc = doc(db, "simulationsCount", "lastId");
-
   if (req.method === "POST") {
     await updateDoc(countRefDoc, { id: increment(1) });
     const lastid = await getDoc(countRefDoc);
-    req.body.id = lastid;
+    req.body.id = lastid.data().id;
     addDoc(databaseRef, req.body).catch((err) => {
       console.error(err);
       updateDoc(countRefDoc, { id: increment(-1) });
