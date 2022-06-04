@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       updateDoc(countRefDoc, { id: increment(-1) });
       return res.status(500).json({ error: `${err}` });
     });
-    return res.status(200).json(req.body);
+    return res.status(200).json(lastid.data().id);
   }
   if (req.method === "GET") {
     const simulationsSnapShot = await getDocs(databaseRef).catch((err) => {
