@@ -28,11 +28,15 @@ export default function ClassificationsAmount({ data }) {
         </div>
         <div>
           <Title>ASD Classifications</Title>
-          <Typography component="p" variant="h4"></Typography>
+          <Typography component="p" variant="h4">
+            {data.filter((item) => item.classification === "ASD").length}
+          </Typography>
         </div>
         <div>
           <Title>TD Classifications</Title>
-          <Typography component="p" variant="h4"></Typography>
+          <Typography component="p" variant="h4">
+            {data.filter((item) => item.classification === "TD").length}
+          </Typography>
         </div>
       </div>
     </React.Fragment>

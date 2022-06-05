@@ -5,11 +5,12 @@ import Title from "../Title";
 
 function createData(simulationsData) {
   let datesAmount = new Map();
+  console.log(simulationsData);
   simulationsData.map((sim) => {
-    if (!datesAmount.has(sim.date)) {
-      datesAmount.set(sim.date, 1);
+    if (!datesAmount.has(sim.date.split(" ")[0])) {
+      datesAmount.set(sim.date.split(" ")[0], 1);
     } else {
-      datesAmount.set(sim.date, datesAmount.get(sim.date) + 1);
+      datesAmount.set(sim.date.split(" ")[0], datesAmount.get(sim.date.split(" ")[0]) + 1);
     }
   });
   return Array.from(datesAmount, ([date, amount]) => ({ date, amount }));

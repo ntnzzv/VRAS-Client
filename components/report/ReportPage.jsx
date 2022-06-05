@@ -8,8 +8,8 @@ import BarChartIPS from "./barcharts/BarChartIPS";
 import React from "react";
 import SimulationsGrid from "./SimulationsGrid";
 export default function ReportsPage({ data }) {
-  const [selectedSimId, setSelectedSimId] = React.useState(0);
-  const selectedSim = data.filter((sim) => sim.id === selectedSimId);
+  const [selectedSimId, setSelectedSimId] = React.useState(1);
+  const selectedSim = data.filter((sim) => sim.id === selectedSimId).pop();
   return (
     <div>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -65,7 +65,7 @@ export default function ReportsPage({ data }) {
                   }}
                 >
                   <div style={{ fontSize: "1.5em" }}>Age</div>
-                  <div>{selectedSim[0].Age}</div>
+                  <div>{selectedSim.age}</div>
                 </div>
                 <div style={{ marginBottom: "40px" }}>
                   <div style={{ fontSize: "1.5em" }}>Screening Date</div>
@@ -76,7 +76,7 @@ export default function ReportsPage({ data }) {
                       alignItems: "center",
                     }}
                   >
-                    {selectedSim[0].date}
+                    {selectedSim.date}
                   </div>
                 </div>
                 <div
@@ -91,19 +91,19 @@ export default function ReportsPage({ data }) {
                   <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
                     <div style={{ fontSize: "1em" }}>AQ Score</div>
                     <div>
-                      <b>{selectedSim[0].AQ}</b>
+                      <b>{selectedSim.AQ}</b>
                     </div>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
                     <div style={{ fontSize: "1em" }}>Δ-IPS</div>
                     <div>
-                      <b>{`${selectedSim[0]["delta-ips"]}(cm)`}</b>
+                      <b>{`${selectedSim["delta-ips"]}(cm)`}</b>
                     </div>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
                     <div style={{ fontSize: "1em" }}>Average IPS</div>
                     <div>
-                      <b>{`${selectedSim[0]["average-ips"]}(cm)`}</b>
+                      <b>{`${selectedSim["average-ips"]}(cm)`}</b>
                     </div>
                   </div>
                 </div>

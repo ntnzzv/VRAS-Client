@@ -5,14 +5,14 @@ import { DataGrid } from "@mui/x-data-grid";
 const columns = [
   { field: "id", headerName: "ID", width: 50 },
   {
-    field: "Age",
+    field: "age",
     headerName: "Age",
     width: 60,
   },
   {
     field: "date",
     headerName: "Screening Date",
-    width: 120,
+    width: 170,
   },
   {
     field: "AQ",
@@ -40,7 +40,7 @@ const columns = [
     width: 140,
   },
   {
-    field: "Classification",
+    field: "classification",
     headerName: "Classification",
     width: 120,
   },

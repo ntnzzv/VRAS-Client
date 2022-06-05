@@ -19,13 +19,13 @@ const data = [
   },
 ];
 const getData = (data, selectedSimId) => {
-  const selectedSim = data.filter((sim) => sim.id === selectedSimId);
+  const selectedSim = data.filter((sim) => sim.id === selectedSimId).pop();
 
   return [
     {
       name: "Average-IPS",
-      before: selectedSim[0]["avg-ips-A"],
-      after: selectedSim[0]["avg-ips-B"],
+      before: selectedSim["avg-ips-A"],
+      after: selectedSim["avg-ips-B"],
     },
   ];
 };

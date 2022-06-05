@@ -22,22 +22,21 @@ const data = [
   },
 ];
 const getData = (data, selectedId) => {
-  const selectedSim = data.filter((sim) => sim.id === selectedId);
+  const selectedSim = data.filter((sim) => sim.id === selectedId).pop();
   return [
     {
       name: "Before socializing",
-      towards: selectedSim[0]["ips-A-towards"],
-      from: selectedSim[0]["ips-A-from"],
+      towards: selectedSim["ipsAtowards"],
+      from: selectedSim["ipsAfrom"],
     },
     {
       name: "After socializing",
-      towards: selectedSim[0]["ips-B-towards"],
-      from: selectedSim[0]["ips-B-from"],
+      towards: selectedSim["ipsBtowards"],
+      from: selectedSim["ipsBfrom"],
     },
   ];
 };
 export default function BarChartIPS({ data, selectedSimId }) {
-  console.log(data);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart

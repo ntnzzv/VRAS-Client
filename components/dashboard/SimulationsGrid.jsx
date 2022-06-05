@@ -22,7 +22,7 @@ export default function SimulationsGrid({ data }) {
           {data.map((screening, index) => (
             <TableRow key={index}>
               <TableCell>{screening.date}</TableCell>
-              <TableCell>{screening.Age}</TableCell>
+              <TableCell>{screening.age}</TableCell>
               <TableCell>{screening.AQ}</TableCell>
             </TableRow>
           ))}

@@ -106,13 +106,8 @@ export default function Layout({ children }) {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-              Virtual Reality ASD Screening (V.A.R.S) - Dashboard
+              Virtual Reality ASD Screening (V.R.A.S) - Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

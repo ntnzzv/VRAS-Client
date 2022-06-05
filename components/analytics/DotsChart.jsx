@@ -8,27 +8,14 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  ZAxis,
 } from "recharts";
 
-const data01 = [
-  { x: 100, y: Math.round(Math.random() * 100) % 30, z: 100 },
-  { x: 120, y: Math.round(Math.random() * 100) % 30, z: 100 },
-  { x: 170, y: Math.round(Math.random() * 100) % 30, z: 100 },
-  { x: 140, y: Math.round(Math.random() * 100) % 30, z: 100 },
-  { x: 150, y: Math.round(Math.random() * 100) % 30, z: 100 },
-  { x: 110, y: Math.round(Math.random() * 100) % 30, z: 100 },
-];
-const data02 = [
-  { x: 200, y: Math.round((Math.random() + 0.3) * 100) % 50, z: 100 },
-  { x: 240, y: Math.round((Math.random() + 0.3) * 100) % 50, z: 100 },
-  { x: 190, y: Math.round((Math.random() + 0.3) * 100) % 50, z: 100 },
-  { x: 198, y: Math.round((Math.random() + 0.3) * 100) % 50, z: 100 },
-  { x: 180, y: Math.round((Math.random() + 0.3) * 100) % 50, z: 100 },
-  { x: 210, y: Math.round((Math.random() + 0.3) * 100) % 50, z: 100 },
-];
-
-export default function DotsChart() {
+export default function DotsChart({ data, selectedX, selectedY, selectedSim }) {
+  const mapAxisValToName = (val) => {
+    if (val === 1) return "AQ";
+    else if (val === 2) return "delta-ips";
+    return "average-ips";
+  };
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ScatterChart
@@ -42,14 +29,41 @@ export default function DotsChart() {
         }}
       >
         <CartesianGrid />
-        <XAxis type="number" dataKey="x" range={[0, 500]} name="IPS" unit="cm" />
-        <YAxis type="number" dataKey="y" range={[0, 50]} name="AQ" />
-        <ZAxis type="number" dataKey="z" range={[0, 200]} />
+        <XAxis
+          type="number"
+          dataKey={mapAxisValToName(selectedX)}
+          range={[0, 500]}
+          name={mapAxisValToName(selectedX)}
+          unit={mapAxisValToName(selectedX) !== "AQ" ? "cm" : ""}
+        />
+        <YAxis
+          type="number"
+          dataKey={mapAxisValToName(selectedY)}
+          range={[0, 50]}
+          name={mapAxisValToName(selectedY)}
+          unit={mapAxisValToName(selectedY) !== "AQ" ? "cm" : ""}
+        />
 
         <Tooltip cursor={{ strokeDasharray: "2 2" }} />
         <Legend />
-        <Scatter name="Typical Development" data={data01} fill="#8884d8" shape="star" />
-        <Scatter name="Austic Spectrum Disorder" data={data02} fill="#82ca9d" shape="triangle" />
+        <Scatter
+          name="Typical Development"
+          data={data.filter((item) => item.classification === "TD")}
+          fill="#8884d8"
+          shape="star"
+        />
+        <Scatter
+          name="Austic Spectrum Disorder"
+          data={data.filter((item) => item.classification === "ASD")}
+          fill="#82ca9d"
+          shape="triangle"
+        />
+        {console.log(selectedSim)}
+        <Scatter
+          name="Selected"
+          data={data.filter((item) => item.id === selectedSim.id)}
+          fill="#ff6666"
+        />
       </ScatterChart>
     </ResponsiveContainer>
   );

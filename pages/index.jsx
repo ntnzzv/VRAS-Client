@@ -1,10 +1,5 @@
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import SimulationsGrid from "../components/dashboard/SimulationsGrid";
-import ClassificationsAmount from "../components/dashboard/ClassificationsAmount";
-import SimulationsAmount from "../components/dashboard/SimulationsAmount";
 import DashboardPage from "../components/dashboard/DashboardPage";
+import getSVMmodel from "../SVMtrained/SVM";
 export default function Home({ data }) {
   return (
     <div>
@@ -14,22 +9,27 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps(context) {
+  const SVM = await require("libsvm-js");
+
   let res = await fetch("http://localhost:3000/api/simulationsData", {
     method: "GET",
     withCredentials: true,
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      key: `${process.env.MY_API}`,
+      Authorization: `${process.env.MY_API}`,
     },
   });
-  const unformattedData = await res.json();
+  const svm = SVM.load(getSVMmodel());
 
-  const data = unformattedData.map((item) => {
-    let formattedDate = new Date(item.date.seconds * 1000).toLocaleDateString();
-    delete item.date;
-    item.date = formattedDate;
-    return item;
+  const unformattedData = await res.json();
+  const data = unformattedData.map((sim) => {
+    const before = (Number(sim.ipsAfrom) + Number(sim.ipsAtowards)) / 2;
+    const after = (Number(sim.ipsBfrom) + Number(sim.ipsBtowards)) / 2;
+    const delta = before - after;
+    const AQ = Number(sim.AQ);
+    sim.classification = svm.predictOne([before, after, delta, AQ]) === 1 ? "ASD" : "TD";
+    return sim;
   });
   return {
     props: { data }, // will be passed to the page component as props

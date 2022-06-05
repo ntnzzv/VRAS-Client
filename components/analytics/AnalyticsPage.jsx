@@ -8,8 +8,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
+import React from "react";
 export default function AnalyticsPage({ data }) {
+  const [xAxisVal, setxAxisVal] = React.useState(1);
+  const [yAxisVal, setyAxisVal] = React.useState(1);
+  const [selectedSimId, setSelectedSimId] = React.useState(1);
+  const selectedSim = data.filter((sim) => sim.id === selectedSimId).pop();
   return (
     <div>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -36,29 +40,36 @@ export default function AnalyticsPage({ data }) {
                 }}
               >
                 <FormControl sx={{ ml: 3, minWidth: 120 }}>
-                  <InputLabel>Y-Axis</InputLabel>
-                  <Select value={1} label="Age">
+                  <InputLabel sx={{ top: -10 }}>Y-Axis</InputLabel>
+                  <Select value={yAxisVal} onChange={(e) => setyAxisVal(e.target.value)}>
                     <MenuItem value={1}>AQ-Score</MenuItem>
                     <MenuItem value={2}>Δ-IPS</MenuItem>
                     <MenuItem value={3}>Average-IPS</MenuItem>
                   </Select>
                 </FormControl>
                 <FormControl sx={{ ml: 3, minWidth: 120 }}>
-                  <InputLabel>X-Axis</InputLabel>
-                  <Select value={3} label="Age">
+                  <InputLabel sx={{ top: -10 }}>X-Axis</InputLabel>
+                  <Select value={xAxisVal} onChange={(e) => setxAxisVal(e.target.value)}>
                     <MenuItem value={1}>AQ-Score</MenuItem>
-                    <MenuItem value={2}>Δ-IPS</MenuItem>
+                    <MenuItem selected value={2}>
+                      Δ-IPS
+                    </MenuItem>
                     <MenuItem value={3}>Average-IPS</MenuItem>
                   </Select>
                 </FormControl>
               </div>
-              <DotsChart />
+              <DotsChart
+                data={data}
+                selectedX={xAxisVal}
+                selectedY={yAxisVal}
+                selectedSim={selectedSim}
+              />
             </Paper>
           </Grid>
 
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-              <SimulationsGrid data={data} />
+              <SimulationsGrid data={data} setSelectedSimId={setSelectedSimId} />
             </Paper>
           </Grid>
         </Grid>
