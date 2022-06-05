@@ -1,4 +1,7 @@
 export default function getSVMmodel() {
   const fs = require("fs");
-  return fs.readFileSync("./SVMtrained/model.txt", "utf8");
+  var path = require("path");
+  const configDirectory = path.resolve(process.cwd(), "config");
+
+  return fs.readFileSync(path.join(configDirectory, "./SVMtrained/model.txt"), "utf8");
 }
