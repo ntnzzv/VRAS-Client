@@ -126,7 +126,7 @@ export default function ReportsPage({ data }) {
                   </div>
                   <div style={{ marginTop: "5px", display: "flex", justifyContent: "center" }}>
                     <Typography variant="h1" gutterBottom component="div">
-                      TD
+                      {selectedSim.classification}
                     </Typography>
                   </div>
                 </Paper>
