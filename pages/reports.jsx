@@ -10,7 +10,7 @@ const reports = ({ data }) => {
 };
 
 export async function getServerSideProps(context) {
-  const SVM = await require("libsvm-js");
+  const SVM = require("libsvm-js/asm");
 
   let res = await fetch("https://vras.vercel.app/api/simulationsData", {
     method: "GET",
