@@ -9,7 +9,7 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const SVM = require("libsvm-js");
+  const SVM = await require("libsvm-js");
 
   let res = await fetch("https://vras.vercel.app/api/simulationsData", {
     method: "GET",

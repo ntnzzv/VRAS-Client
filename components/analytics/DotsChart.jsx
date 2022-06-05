@@ -58,7 +58,6 @@ export default function DotsChart({ data, selectedX, selectedY, selectedSim }) {
           fill="#82ca9d"
           shape="triangle"
         />
-        {console.log(selectedSim)}
         <Scatter
           name="Selected"
           data={data.filter((item) => item.id === selectedSim.id)}

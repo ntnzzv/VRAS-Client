@@ -5,7 +5,6 @@ import Title from "../Title";
 
 function createData(simulationsData) {
   let datesAmount = new Map();
-  console.log(simulationsData);
   simulationsData.map((sim) => {
     if (!datesAmount.has(sim.date.split(" ")[0])) {
       datesAmount.set(sim.date.split(" ")[0], 1);
