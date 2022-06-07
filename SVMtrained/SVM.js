@@ -1,35 +1,35 @@
 export default function getSVMmodel() {
-  const SVM = require("libsvm-js/asm");
-  const svm = new SVM({
-    kernel: SVM.KERNEL_TYPES.RBF, // The type of kernel I want to use
-    type: SVM.SVM_TYPES.C_SVC, // The type of SVM I want to run
-    gamma: 0.001, // RBF kernel gamma parameter
-    cost: 0.001, // C_SVC cost parameter
-  });
+  //   const SVM = require("libsvm-js/asm");
+  //   const svm = new SVM({
+  //     kernel: SVM.KERNEL_TYPES.RBF, // The type of kernel I want to use
+  //     type: SVM.SVM_TYPES.C_SVC, // The type of SVM I want to run
+  //     gamma: 0.001, // RBF kernel gamma parameter
+  //     cost: 0.001, // C_SVC cost parameter
+  //   });
 
-  const features = [
-    [280, 285, 5],
-    [273, 281, 8],
-    [295, 299, 4],
-    [310, 313, 3],
-    [298, 300, 2],
-    [323, 320, 3],
-    [245, 240, -5],
-    [238, 237, -1],
+  //   const features = [
+  //     [280, 285, 5],
+  //     [273, 281, 8],
+  //     [295, 299, 4],
+  //     [310, 313, 3],
+  //     [298, 300, 2],
+  //     [323, 320, 3],
+  //     [245, 240, -5],
+  //     [238, 237, -1],
 
-    [185, 175, -10],
-    [177, 168, -9],
-    [165, 163, -2],
-    [190, 180, -10],
-    [188, 180, -8],
-    [70, 60, -10],
-    [63, 57, -5],
-    [40, 42, 2],
-  ];
-  const labels = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0];
-  svm.train(features, labels); // train the model
+  //     [185, 175, -10],
+  //     [177, 168, -9],
+  //     [165, 163, -2],
+  //     [190, 180, -10],
+  //     [188, 180, -8],
+  //     [70, 60, -10],
+  //     [63, 57, -5],
+  //     [40, 42, 2],
+  //   ];
+  //   const labels = [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0];
+  //   svm.train(features, labels); // train the model
 
-  console.log(svm.serializeModel());
+  //   console.log(svm.serializeModel());
   return `svm_type c_svc
   kernel_type rbf
   gamma 0.001
