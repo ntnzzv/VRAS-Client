@@ -13,6 +13,7 @@ export default function SimulationsGrid({ data }) {
       <Table size="small">
         <TableHead>
           <TableRow>
+            <TableCell>ID</TableCell>
             <TableCell>Date</TableCell>
             <TableCell>Age</TableCell>
             <TableCell>AQ-Score</TableCell>
@@ -21,6 +22,7 @@ export default function SimulationsGrid({ data }) {
         <TableBody>
           {data.map((screening, index) => (
             <TableRow key={index}>
+              <TableCell>{screening.id}</TableCell>
               <TableCell>{screening.date}</TableCell>
               <TableCell>{screening.age}</TableCell>
               <TableCell>{screening.AQ}</TableCell>
