@@ -32,14 +32,12 @@ export default function DotsChart({ data, selectedX, selectedY, selectedSim }) {
         <XAxis
           type="number"
           dataKey={mapAxisValToName(selectedX)}
-          range={[0, 500]}
           name={mapAxisValToName(selectedX)}
           unit={mapAxisValToName(selectedX) !== "AQ" ? "cm" : ""}
         />
         <YAxis
           type="number"
           dataKey={mapAxisValToName(selectedY)}
-          range={[0, 50]}
           name={mapAxisValToName(selectedY)}
           unit={mapAxisValToName(selectedY) !== "AQ" ? "cm" : ""}
         />
