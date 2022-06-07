@@ -1,10 +1,11 @@
 export default function getSVMmodel() {
-  //   const SVM = require("libsvm-js/asm");
+  const SVM = require("libsvm-js/asm");
   //   const svm = new SVM({
   //     kernel: SVM.KERNEL_TYPES.RBF, // The type of kernel I want to use
   //     type: SVM.SVM_TYPES.C_SVC, // The type of SVM I want to run
   //     gamma: 0.001, // RBF kernel gamma parameter
-  //     cost: 0.001, // C_SVC cost parameter
+  //     cost: 1, // C_SVC cost parameter
+  //     probabilityEstimates: true,
   //   });
 
   //   const features = [
@@ -34,26 +35,21 @@ export default function getSVMmodel() {
   kernel_type rbf
   gamma 0.001
   nr_class 2
-  total_sv 16
-  rho -0.000158108
+  total_sv 9
+  rho 0.00271918
   label 1 0
-  nr_sv 8 8
+  probA -2.55583
+  probB -0.0520198
+  nr_sv 5 4
   SV
-  0.001 1:280 2:285 3:5
-  0.001 1:273 2:281 3:8
-  0.001 1:295 2:299 3:4
-  0.001 1:310 2:313 3:3
-  0.001 1:298 2:300 3:2
-  0.001 1:323 2:320 3:3
-  0.001 1:245 2:240 3:-5
-  0.001 1:238 2:237 3:-1
-  -0.001 1:185 2:175 3:-10
-  -0.001 1:177 2:168 3:-9
-  -0.001 1:165 2:163 3:-2
-  -0.001 1:190 2:180 3:-10
-  -0.001 1:188 2:180 3:-8
-  -0.001 1:70 2:60 3:-10
-  -0.001 1:63 2:57 3:-5
-  -0.001 1:40 2:42 3:2
+  0.7888304319398047 1:273 2:281 3:8
+  0.4174339428733529 1:298 2:300 3:2
+  0.8394086751429229 1:323 2:320 3:3
+  0.3053293691617866 1:245 2:240 3:-5
+  0.6904068653945603 1:238 2:237 3:-1
+  -0.7231191372574104 1:165 2:163 3:-2
+  -0.7287060016088317 1:190 2:180 3:-10
+  -0.7948133000657003 1:70 2:60 3:-10
+  -0.7947708455804851 1:40 2:42 3:2
   `;
 }
