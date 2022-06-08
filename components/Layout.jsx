@@ -125,7 +125,6 @@ export default function Layout({ children }) {
           </Toolbar>
           <Divider />
           <List>{NavBar}</List>
-          <Divider />
         </Drawer>
         <Box
           component="main"
