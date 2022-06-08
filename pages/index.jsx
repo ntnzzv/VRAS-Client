@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
     const after = (Number(sim.ipsBfrom) + Number(sim.ipsBtowards)) / 2;
     const delta = before - after;
     const AQ = Number(sim.AQ);
-    sim.classification = svm.predictOne([before, after, delta, AQ]) === 1 ? "ASD" : "TD";
+    sim.classification = svm.predictOne([before, after, delta]) === 1 ? "ASD" : "TD";
     return sim;
   });
   return {

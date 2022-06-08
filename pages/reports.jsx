@@ -32,9 +32,7 @@ export async function getServerSideProps(context) {
     item["average-ips"] = Math.round((avgIpsAfter + avgIpsBefore) / 2);
     item["delta-ips"] = Math.round(avgIpsAfter - avgIpsBefore);
     item.classification =
-      svm.predictOne([avgIpsBefore, avgIpsAfter, avgIpsBefore - avgIpsAfter, Number(item.AQ)]) === 1
-        ? "ASD"
-        : "TD";
+      svm.predictOne([avgIpsBefore, avgIpsAfter, avgIpsAfter - avgIpsBefore]) === 1 ? "ASD" : "TD";
     return item;
   });
   return {
