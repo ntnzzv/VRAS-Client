@@ -22,7 +22,11 @@ export default function SimulationsAmount({ data }) {
       <Title>This Week</Title>
       <ResponsiveContainer>
         <LineChart
-          data={createData(data)}
+          data={createData(data).sort(function (a, b) {
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(a.date) - new Date(b.date);
+          })}
           margin={{
             top: 16,
             right: 16,
