@@ -29,7 +29,7 @@ export async function getServerSideProps(context) {
     item["avg-ips-A"] = Math.round(avgIpsBefore);
     item["avg-ips-B"] = Math.round(avgIpsAfter);
     item["average-ips"] = Math.round((avgIpsAfter + avgIpsBefore) / 2);
-    item["delta-ips"] = Math.round(avgIpsBefore - avgIpsAfter);
+    item["delta-ips"] = Math.round(avgIpsAfter - avgIpsBefore);
     item.AQ = Number(item.AQ);
     item.classification =
       svm.predictOne([avgIpsBefore, avgIpsAfter, avgIpsBefore - avgIpsAfter, Number(item.AQ)]) === 1
