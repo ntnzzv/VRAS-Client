@@ -30,13 +30,14 @@ export default function AnalyticsPage({ data }) {
                 height: 500,
               }}
             >
-              <Title>Classification and Data Correlation</Title>
+              <Title>Data Correlations</Title>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "flex-end",
                   alignItems: "center",
                   marginRight: "20px",
+                  marginTop: "10px",
                 }}
               >
                 <FormControl sx={{ ml: 3, minWidth: 120 }}>

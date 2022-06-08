@@ -45,10 +45,8 @@ export default function BarChartIPS({ data, selectedSimId }) {
         data={getData(data, selectedSimId)}
         margin={{
           top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
         }}
+        style={{ fontSize: "15px" }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />

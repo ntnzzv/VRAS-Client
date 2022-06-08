@@ -38,9 +38,7 @@ export default function BarChartAverage({ data, selectedSimId }) {
         data={getData(data, selectedSimId)}
         margin={{
           top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
+          bottom: 19,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -48,8 +46,8 @@ export default function BarChartAverage({ data, selectedSimId }) {
         <YAxis unit="cm" />
         <Tooltip />
         <Legend />
-        <Bar name="Before social stage" dataKey="before" fill="#8884d8" />
-        <Bar name="After social stage" dataKey="after" fill="#82ca9d" />
+        <Bar name="Before socializing" dataKey="before" fill="#8884d8" />
+        <Bar name="After socializing" dataKey="after" fill="#82ca9d" />
       </BarChart>
     </ResponsiveContainer>
   );

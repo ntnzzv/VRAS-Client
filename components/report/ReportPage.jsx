@@ -13,11 +13,9 @@ export default function ReportsPage({ data }) {
   return (
     <div>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Grid container direction="row" spacing={3}>
-          {/* Recent Deposits */}
-
+        <Grid container spacing={3}>
           {/* Chart */}
-          <Grid item xs={3}>
+          <Grid item sm={3} xs={12}>
             <Paper
               sx={{
                 p: 0,
@@ -110,7 +108,7 @@ export default function ReportsPage({ data }) {
               </div>
             </Paper>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item sm={9} xs={12}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <Paper
@@ -131,10 +129,10 @@ export default function ReportsPage({ data }) {
                   </div>
                 </Paper>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item sm={6} xs={12}>
                 <Paper
                   sx={{
-                    p: 2,
+                    p: 1,
                     display: "flex",
                     flexDirection: "row",
                     height: 300,
@@ -143,10 +141,10 @@ export default function ReportsPage({ data }) {
                   <BarChartAverage data={data} selectedSimId={selectedSimId} />
                 </Paper>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item sm={6} xs={12}>
                 <Paper
                   sx={{
-                    p: 2,
+                    p: 1,
                     display: "flex",
                     flexDirection: "row",
                     height: 300,
